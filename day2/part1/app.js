@@ -15,11 +15,11 @@ const billForFood = (price) => {
 };
 
 const billForClothes = (price) => {
-  return price * 1.12;
+    return price * 1.12;
 };
 
 const billForDrinks = (price) => {
-  return price * 1.2;
+    return price * 1.2;
 };
 
 const printBillFood = (txt) => {
@@ -38,7 +38,7 @@ const printBillFoAll = (txt) => {
     console.log("------------------")
 };
 
- // This Func is a higher Order Function
+// This Func is a higher Order Function
 const finalBill = (foodPrice, clothesPrice, drinksPrice, cb) => {
     let totalAmount = billForFood(foodPrice) + billForClothes(clothesPrice) + billForDrinks(drinksPrice);
     cb(totalAmount);
