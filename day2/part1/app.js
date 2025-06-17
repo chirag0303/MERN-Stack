@@ -47,5 +47,3 @@ const finalBill = (foodPrice, clothesPrice, drinksPrice, cb) => {
 finalBill(100, 200, 300, printBillFoAll); // printBillForAll is a CallBack Function
 finalBill(100, 200, 0, printBillFoodDrinks);
 finalBill(100, 0, 0, printBillFood);
-
-
