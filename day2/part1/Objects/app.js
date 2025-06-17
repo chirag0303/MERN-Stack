@@ -80,12 +80,15 @@ const person1 = {
     height: 1.5, //metera
     weight: 65, //kg
     college: "LPU",
+    marks: {
+        maths: 89,
+        science: 56,
+    }
 };
 //const person2 = person1; // shallow copy
 // ----- De-structuring--------
 
 const { name, college } = person1; // name will the 'name' of person same for 'college'
 const person2 = {...person1}; // ... is a spread operator helps in making copy
-console.log(person2);
-console.log(name,college);
-
+person2.marks.maths = 75;
+console.log(person1,person2);
