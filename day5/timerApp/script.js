@@ -24,6 +24,6 @@ const handleResume = () => {
 }
 const handleLap = () => {
     const para = document.createElement("p");
-    para.innerText = timerText.innerText
+    para.innerText = timerText.innerText;
     document.getElementById('root').appendChild(para);
 }

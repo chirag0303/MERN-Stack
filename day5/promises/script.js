@@ -23,4 +23,4 @@ const renderUI = (data) => {
     products.forEach((element) =>{
     
     })
-}
+};
