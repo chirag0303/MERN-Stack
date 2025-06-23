@@ -8485,31 +8485,65 @@ const dummyData = {
   ],
 };
 
-const renderTrendingVideos = (dataDb) => {
-  console.log(dataDb);
+const handleViewVideo = (videoID) =>{
+  window.open(`./view.html?videoId=${videoID}`);
+}
+const cardsParentElem = document.getElementById("cards-parent");
+
+const renderTrendingVideos = (dataObj) => {
+    const { list } = dataObj;
+    console.log("list:", list);
+
+    list.forEach((element) => {
+        const { author, publishedText, title, viewCountText, videoThumbnails, authorThumbnails, videoId } = element;
+
+        const newDiv = document.createElement("div");
+        newDiv.className = "trending-card";
+
+        newDiv.innerHTML = `
+                <div className='video-thumbnail-container' onclick="handleViewVideo('${videoId}')">
+                    <img src='${videoThumbnails[1].url}' class='video-thumb-img'>
+                </div>
+                <div className='card-details'>
+                    <div className='author-image-container'>
+                        <img src='${authorThumbnails[0].url}'>
+                    </div>
+                    <div className='video-data-right'>
+                        <p className='video-title'>${title}</p>
+                        <p className='author-title'>${author}</p>
+                        <div>
+                            <p className='view-count'>${viewCountText}</p>
+                            <p className='published-text'>${publishedText}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+        cardsParentElem.appendChild(newDiv);
+    });
 };
 
-const getTrendingVideos = () => {
-  //   const request = fetch("https://youtube138.p.rapidapi.com/v2/trending", {
-  //     method: "GET",
-  //     headers: {
-  //       "x-rapidapi-key": "854b7c5029msh397e51345ebe868p138047jsnfbf94bdf3770",
-  //       "x-rapidapi-host": "youtube138.p.rapidapi.com",
-  //     },
-  //   });
+const getData = () => {
+    // const request = fetch("https://youtube138.p.rapidapi.com/v2/trending", {
+    //     method: "GET",
+    //     headers: {
+    //         "x-rapidapi-key": "59cef08928msh10810e6f3f58241p13fe36jsneaf0bb86af62",
+    //         "x-rapidapi-host": "youtube138.p.rapidapi.com",
+    //     },
+    // });
 
-  //   request
-  //     .then((res) => {
-  //       const pr2 = res.json();
-  //       pr2.then((data) => {
-  //         console.log(data);
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       alert(`Unable to get Videos ${err.message}`);
-  //       console.log("Unable to get Videos ", err);
-  //     });
-  renderTrendingVideos(dummyData);
+    // request
+    //     .then((response) => {
+    //         const pr2 = response.json();
+    //         pr2.then((data) => {
+    //             renderTrendingVideos(data);
+    //         });
+    //     })
+    //     .catch((err) => {
+    //         alert(`Error in trending videos ${err.message}`);
+    //         console.log(`Error in trending videos ${err.message}`, err);
+    //     });
+    renderTrendingVideos(dummyData);
 };
 
-getTrendingVideos();
+getData();
