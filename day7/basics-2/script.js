@@ -53,12 +53,12 @@ const Card = (obj) => {  // This is a react component
 
 const Container = (
   <div>    
-    {Card({title:"Hello"})}
+    {Card({title:"Hello"})} 
     <Card title="Notice"></Card>
     {Card({title:"Warning.."})}
   </div>
 );
-
+// line 56 and 57 are same 
 reactRoot.render(Container);
 
 
