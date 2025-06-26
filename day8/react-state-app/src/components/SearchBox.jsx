@@ -5,7 +5,7 @@ import { useState } from "react";
 
 
 const SearchBox = () => {
-    const { monitor, remote } = useState();
+    const [ monitor, remote ] = useState();
     // let searchText = "Hi";
     const handleSearch = (e) => {
         // console.log(e.target.value);
