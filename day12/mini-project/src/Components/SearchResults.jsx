@@ -11,7 +11,7 @@ const SearchResults = (props) => {
     const [results, setResults] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    console.log("🟡 : page:", page);
+
     const { searchQuery } = props; // a
 
     const getSearchResults = async () => {
@@ -19,7 +19,7 @@ const SearchResults = (props) => {
             `https://dummyjson.com/products/search?q=${searchQuery}&skip=${LIMIT * (page - 1)}&limit=${LIMIT}`
         );
         const data = await response.json();
-        console.log("🟡 : data:", data);
+
 
         setResults(data.products);
 
