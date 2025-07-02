@@ -1,20 +1,24 @@
-import { Header } from "../Components/Header";
-import { Footer } from "../Components/Footer";
-import { CategoryList } from "../Components/CategoryList";
+// module.css :: cover it in the last
+// tailwind - is just (normal css ++) with shorthands
 
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
+import { CategoryList } from "../components/CategoriesList";
 
-const HomePage = () => {
+const HomePage = (obj) => {
+    const { text, handleSearchText } = obj;
+
     return (
         <div>
-           <Header />
-           <main className="p-8">
-            <div>
-                <CategoryList />
-            </div>
-           </main>
-           <Footer />
+            <Header text={text} handleSearchText={handleSearchText} />
+            <main className="p-8">
+                <div>
+                    <CategoryList />
+                </div>
+            </main>
+            <Footer />
         </div>
     );
 };
 
-export {HomePage};
+export { HomePage };
