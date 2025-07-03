@@ -1,1 +1,1 @@
-Hey, This repo contains all code of my summer PEP classes of MERN Stack
+Hey, This repo contains all code of my summer PEP MERN Stack classes.
