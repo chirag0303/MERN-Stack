@@ -46,7 +46,27 @@ const getAllDataFromArrayFromFile = async (filePath) => {
 };
 
 
-const editObjectFromArrayFromFile = async (newObj, idx, filePath) => {
+const editObjectFromArrayFromFile = async (newObjProperties, elemId, filePath) => {
+    const arr = await getAllDataFromArrayFromFile(filePath);
+    const idx = arr.findIndex((elem)=> {
+        if (elem.id === elemId){
+            return true;
+        }
+        return false;
+    });
+
+    if (idx ===-1){
+        console.error("Invalid Id, no object found");
+        return arr;
+    }
+
+
+    //changing the object here
+    const currentObj = arr[idx];
+    const newobj = {...currentObj, ...newObjProperties}
+    arr[idx] = newobj;
+
+    saveArrayToFile(arr, filePath);
 };
 
 module.exports = {
