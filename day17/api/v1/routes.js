@@ -1,20 +1,8 @@
 const express = require("express");
+const { productRouter } = require("./products/routes.js");
 
 const apiRouter = express.Router();
 
-apiRouter.get("/",(req,res)=>{
-    res.json({
-        isSuccess: true,
-        message: "Hello from router",
-    });
-});
-
-
-apiRouter.get("/hello/user",(req,res)=>{
-    res.json({
-        isSuccess: true,
-        message: "Hello from user",
-    });
-});
+apiRouter.use("/products",productRouter);
 
 module.exports = {apiRouter};

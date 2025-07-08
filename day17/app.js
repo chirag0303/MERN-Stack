@@ -6,17 +6,15 @@ const express = require("express");
 const {apiRouter} = require("./api/v1/routes");
 
 const app = express();
-
+require("./config/db.js");
 app.use(express.json()); // this line wil read the body of the req sent from the client in json format
 
 
-app.get("/",(req,res)=>{
-    res.status(200);
-    res.json({
-        isSuccess: true,
-        message: "Server is running",
-        data: {},
-    });
+app.use((req,res,next)=>{
+    console.log("-------------");
+    console.log(new Date(),req.url,req.method);
+    console.log("-------------");
+    next();
 });
 
 app.use("/api/v1",apiRouter);
