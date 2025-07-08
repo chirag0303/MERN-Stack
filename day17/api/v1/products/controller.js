@@ -1,6 +1,86 @@
-const createProductController = (req,res) => {
-    console.log("Creating Product....");
-    console.log(req.body);
+const { Product } = require("../../../models/ProductSchema");
+
+const createProductController = async (req, res) => {
+    try {
+        const data = req.body;
+        console.log("creating product...", data);
+
+        let newProduct = await Product.create(data);
+        res.status(201).json({
+            isSuccess: true,
+            message: `Product created`,
+            data: {
+                product: newProduct,
+            },
+        });
+    } catch (err) {
+        if (err.name === "ValidationError" || err.code == "11000") {
+            res.status(400).json({ isSuccess: false, message: `Err: ${err.message}`, data: {} });
+        }
+        console.log(" Error in createProductController");
+        res.status(501).json({ isSuccess: false, message: "Internal Server Error", data: {} });
+    }
+};
+const getAllProducts = async (req,res)=>{
+    try {
+        const allProducts = await Product.find();
+        res.status(200);
+        res.json({
+            isSuccess: true,
+            message: "products Fetched",
+            data: {
+                products: allProducts,
+            },
+        });
+    } catch (err){
+        console.log("---  error in get products ----");
+        console.log(err.message);
+
+        res.status(500);
+        res.json({
+            isSuccess: false,
+            message: "Internal Server error",
+            data: {},
+        });
+    }
 }
 
-module.exports = {createProductController};
+const updateProductController = async (req,res) => {
+    try{
+        const {productId} = req.params;
+        const newData = req.body;
+        const newProduct = await Product.findByIdAndUpdate(productId, newData,{
+            new: true, // this shows the latest data 
+            runValidators: true, // this run the validators written in Schema on new data
+        })
+        if (newProduct === null){
+            res.status(400);
+            res.json({
+                isSuccess: false,
+                message: "Can't find Product",
+                data: {},
+            });
+        }
+
+        res.status(200).
+        res.json({
+            isSuccess: true,
+            message: "Product Updated",
+            data: {
+                product: newProduct,
+            },
+        });
+
+    } catch(err) {
+         console.log("---  error in update products ----");
+        console.log(err.message);
+
+        res.status(500);
+        res.json({
+            isSuccess: false,
+            message: "Internal Server error",
+            data: {},
+        });
+    }
+}
+module.exports = { createProductController, getAllProducts, updateProductController};
