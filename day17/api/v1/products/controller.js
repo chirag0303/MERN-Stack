@@ -83,4 +83,42 @@ const updateProductController = async (req,res) => {
         });
     }
 }
-module.exports = { createProductController, getAllProducts, updateProductController};
+
+const deleteProductCOntroller = async (req,res) => {
+    try {
+        const {productId} = req.params;
+        const deletedId = await Product.findByIdAndDelete(productId);
+
+        if (deletedId == undefined){
+            res.status(400);
+            res.json({
+                isSuccess: false,
+                message: "Can't find Item",
+                data: {},
+            });
+        }
+
+        res.status(204);
+        res.json({
+            isSuccess: true,
+            message: "Product deleted",
+            data: {
+                product: deletedId,
+            },
+        });
+    } catch (err) {
+        console.log("---  error in delete products ----");
+        console.log(err.message);
+
+        res.status(500);
+        res.json({
+            isSuccess: false,
+            message: "Internal Server error",
+            data: {
+                errMessage: err.message,
+            },
+        });
+    }
+
+}
+module.exports = { createProductController, getAllProducts, updateProductController, deleteProductCOntroller};
